@@ -84,8 +84,8 @@ function App() {
   }
 
   async function getData(address: string) {
-    let resp = await axios.post('http://localhost:5000/users', { address });
-    let respTrans = await axios.get('http://localhost:5000/transactions?address=' + resp.data.address)
+    let resp = await axios.post('https://web3server.onrender.com/users', { address });
+    let respTrans = await axios.get('https://web3server.onrender.com/transactions?address=' + resp.data.address)
     setUser(resp.data);
     setTransactions(respTrans.data)
 
@@ -116,9 +116,9 @@ function App() {
       }
       if (obj.type === 'deposit') {
         //depositTokens(data.amount)
-        axios.post('http://localhost:5000/transactions/deposit', data).catch(e => alert(e.response.data.message));
+        axios.post('https://web3server.onrender.com/transactions/deposit', data).catch(e => alert(e.response.data.message));
       } else {
-        axios.post('http://localhost:5000/transactions/withdraw', data).then(resp => {
+        axios.post('https://web3server.onrender.com/transactions/withdraw', data).then(resp => {
           withdrawTokens(resp.data);
         }).catch(e => alert(e.response.data.message));
       }
