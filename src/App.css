@@ -1,38 +1,121 @@
-.App {
-  text-align: center;
+body {
+  background-color: #F8AAD3;
+}
+.header {
+  padding: 20px;
+  background-color: rgba(59, 130, 246, .5);
+  display: flex;
+  justify-content: space-between;
+}
+.header a {
+  font-size: 35px;
+  color: #fff;
+  text-decoration: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.pink-button {
+  background-color: #DD1980;
+  border-radius: 15px;
+  color: #fff;
+  width: 200px;
+  border: none;
+  cursor: pointer;
+  min-height: 45px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.content {
+  background-color: #fff;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 20px;
+  padding: 15px;
+  margin-top: 30px;
+  min-height: 70vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form-wrapper {
+  background-color: #eeb8da73;
+  margin: 16px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.btns-wrapper {
+  display: flex;
+}
+.btns-wrapper button:nth-child(1) {
+  margin-right: 5px;
+}
+.btns-wrapper button:nth-child(2) {
+  margin-left: 5px;
+}
+.blue-btn {
+  color:rgba(59, 130, 246, .5);
+  width: 200px;
+  padding: 14px;
+  background-color: rgba(36, 39, 225, 0.09);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.confirm-wrapper button {
+  width: 100%
+}
+
+.blue-btn.active {
+  background-color: rgba(59, 130, 246, .5);
+  color: #fff
+}
+
+.currency-wrapper {
+  display: flex;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  justify-content: space-between;
+}
+.currency-wrapper div {
+  width: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 14px;
+  border-radius: 5px;
+}
+
+.currency-wrapper input {
+  width: 290px;
+  padding-left: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.transactions-title {
+  color: #DD1980;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid rgb(102, 190, 218);
+  border-bottom-style: dashed;
+  padding-bottom: 25px;
+}
+.column-wrapper {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color:#DD1980;
+}
+.column-wrapper div {
+  width: 25%;
+}
+.account-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.account-wrapper small {
+  color: #fff;
+  font-size: 10px;
 }
