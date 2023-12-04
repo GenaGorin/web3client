@@ -58,29 +58,29 @@ function App() {
     }
   }
 
-  async function depositTokens(amount: number) {
+  async function depositTokens(amount: number, data: any) {
 
     const contractInstance = getDepositContractInstance(CONTRACT_ADDRESS);
 
     const tx = await contractInstance.populateTransaction.deposit();
 
-    // if (window.ethereum) {
-    //   window.ethereum
-    //     .request({
-    //       method: 'eth_sendTransaction',
-    //       params: [
-    //         {
-    //           from: user.address,
-    //           to: tx.to,
-    //           data: tx.data,
-    //           value: "0x0"
-    //         },
-    //       ],
-    //     })
-    //     .then((txHash) => {
-    //       console.log("txHash", txHash)
-    //     });
-    // }
+    if (window.ethereum) {
+      window.ethereum
+        .request({
+          method: 'eth_sendTransaction',
+          params: [
+            {
+              from: user.address,
+              to: tx.to,
+              data: tx.data,
+              value: "0x0"
+            },
+          ],
+        })
+        .then((txHash) => {
+          axios.post('https://web3server.onrender.com/transactions/deposit', data).catch(e => alert(e.response.data.message));
+        });
+    }
   }
 
   async function getData(address: string) {
@@ -115,8 +115,7 @@ function App() {
         return false;
       }
       if (obj.type === 'deposit') {
-        //depositTokens(data.amount)
-        axios.post('https://web3server.onrender.com/transactions/deposit', data).catch(e => alert(e.response.data.message));
+        depositTokens(data.amount, data)
       } else {
         axios.post('https://web3server.onrender.com/transactions/withdraw', data).then(resp => {
           withdrawTokens(resp.data);
