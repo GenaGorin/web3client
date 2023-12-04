@@ -38,7 +38,12 @@ function App() {
     const contractInstance = getDepositContractInstance(CONTRACT_ADDRESS);
     const tx = await contractInstance.populateTransaction.withdraw(data?.amount, data.timeBet, data.nonce, data.signature);
 
+    const web3 = new Web3('https://eth-mainnet.g.alchemy.com/v2/DJ0wKmAHyWBsi7PTz2aLm_Iqcq9Ny_KM');
 
+    const weiValue = web3.utils.toWei(data?.amount, 'ether');
+
+    // @ts-ignore
+    const hexadecimal = Number(weiValue).toString(16);
 
     if (window.ethereum) {
       window.ethereum
@@ -49,7 +54,7 @@ function App() {
               from: user.address,
               to: tx.to,
               data: tx.data,
-              value: "0x0"
+              value: hexadecimal
             },
           ],
         })
@@ -69,6 +74,10 @@ function App() {
 
     const weiValue = web3.utils.toWei(amount, 'ether');
 
+    // @ts-ignore
+    const hexadecimal = Number(weiValue).toString(16);
+
+
 
 
     if (window.ethereum) {
@@ -80,12 +89,12 @@ function App() {
               from: user.address,
               to: tx.to,
               data: tx.data,
-              value: weiValue
+              value: hexadecimal
             },
           ],
         })
         .then((txHash) => {
-          axios.post('https://web3server.onrender.com/transactions/deposit', data).catch(e => alert(e.response.data.message));
+          axios.post('https://web3server.onrender.com/transactions/deposit', { ...data, hash: txHash }).catch(e => alert(e.response.data.message));
         });
     }
   }
@@ -116,7 +125,7 @@ function App() {
       let data = { ...obj };
       data.address = user.address;
       data.coin = 'eth';
-      data.hash = 'hashhere'
+      data.hash = 'test-hash'
       if (!user.address) {
         alert('not auth');
         return false;
