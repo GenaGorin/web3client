@@ -7,6 +7,7 @@ import { MetaMaskInpageProvider } from "@metamask/providers";
 import axios from 'axios';
 import { ethers, providers, Wallet } from "ethers";
 import { CONTRACT_ADDRESS, DEPOSIT_CONTRACT_ABI } from './const-data';
+import Web3 from 'web3';
 
 declare global {
   interface Window {
@@ -64,6 +65,12 @@ function App() {
 
     const tx = await contractInstance.populateTransaction.deposit();
 
+    const web3 = new Web3('https://eth-mainnet.g.alchemy.com/v2/DJ0wKmAHyWBsi7PTz2aLm_Iqcq9Ny_KM');
+
+    const weiValue = web3.utils.toWei(amount, 'ether');
+
+
+
     if (window.ethereum) {
       window.ethereum
         .request({
@@ -73,7 +80,7 @@ function App() {
               from: user.address,
               to: tx.to,
               data: tx.data,
-              value: "0x0"
+              value: weiValue
             },
           ],
         })
